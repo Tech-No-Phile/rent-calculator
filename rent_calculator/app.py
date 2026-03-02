@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -80,7 +81,9 @@ st.markdown("""
 # --- DATA PROCESSING ENGINE ---
 @st.cache_data
 def load_and_clean_data():
-    df = pd.read_csv("Mumbai_House_Rent.csv")
+    base_dir = os.path.dirname(__file__)
+    csv_path = os.path.join(base_dir, "Mumbai_House_Rent.csv")
+    df = pd.read_csv(csv_path)
     
     # Cleaning numeric columns from strings (e.g., '350 sq.ft')
     def clean_sqft(x):
